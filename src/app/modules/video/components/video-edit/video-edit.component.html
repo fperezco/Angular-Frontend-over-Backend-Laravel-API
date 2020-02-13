@@ -1,0 +1,51 @@
+<div class="container  mt-5">
+
+    <div name="loading" id="loading" *ngIf="loading" class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="!loading">
+        <div class="col-md-6">
+            <form (ngSubmit)="updateVideo(forma)" novalidate="" #forma="ngForm">
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input class="form-control" [ngClass]="{'is-invalid':  (nombre.errors?.minlength || nombre.errors?.required) && nombre.touched , 'is-valid': (!nombre.errors?.minlength && !nombre.errors?.required)}" type="text" placeholder="nombre" name="nombre" [(ngModel)]="video.name"
+                    required minlength=5 #nombre="ngModel">
+                    <div *ngIf="nombre.errors?.required && nombre.touched" class="invalid-feedback">
+                        Este campo es requerido
+                    </div>
+                    <div *ngIf="nombre.errors?.minlength" class="invalid-feedback">
+                        Al menos {{nombre.errors.minlength.requiredLength}} caracteres
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="url">Url</label>
+                    <input class="form-control" [ngClass]="{'is-invalid':  (url.errors?.minlength || url.errors?.required) && url.touched , 'is-valid': (!url.errors?.minlength && !url.errors?.required)}" type="text" placeholder="url" name="url" [(ngModel)]="video.url"
+                    required minlength=5 #url="ngModel">
+                    <div *ngIf="url.errors?.required && url.touched" class="invalid-feedback">
+                        Este campo es requerido
+                    </div>
+                    <div *ngIf="url.errors?.minlength" class="invalid-feedback">
+                        Al menos {{url.errors.minlength.requiredLength}} caracteres
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Descripcion</label>
+                    <textarea class="form-control"  id="description" name="description"  [(ngModel)]="video.description" #name="ngModel"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block" [disabled]="!forma.valid">Modificar</button>
+            </form>
+        </div>
+        <div class="col-md-4">
+            <img class="img-thumbnail" [src]="video.picture">
+        </div>
+    </div>
+
+
+    
+</div>

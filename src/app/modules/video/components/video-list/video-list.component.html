@@ -1,0 +1,34 @@
+<div class="container mt-5">
+    <div class="row float-right">
+        <a href="videos/new" class="btn btn-outline-success my-2 my-sm-0">Nuevo Video</a>
+    </div>
+    <ng-container *ngIf="loading; else elseTemplate">
+        <div name="loading" id="loading" *ngIf="loading" class="d-flex justify-content-center">
+            <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    </ng-container>
+♂
+    <ng-template #elseTemplate>    
+        <div class="row">
+            <h1>Videos</h1>
+        </div>
+        <div class="row">
+            <div class="row row-cols-1 row-cols-md-6">
+                <div class="col mb-4" *ngFor="let video of videosDisponibles;">
+                    <div class="card">
+                        <a [routerLink]="[ '/videos', video.id]">
+                            <img src="{{video.picture}}" class="card-img-top" alt="Ver más" title="Ver más">
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">{{video.name}}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+        </div>
+    </ng-template>
+    
+</div>

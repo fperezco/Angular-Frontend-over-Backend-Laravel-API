@@ -1,0 +1,21 @@
+<div class="container text-center mt-5">
+
+    <div name="loading" id="loading" *ngIf="loading" class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
+    <div class="row col-12 justify-content-center">
+        <div class="card" style="width: 30rem;" *ngIf="!loading">
+            <img class="card-img-top" [src]="video.picture" alt="Card image cap">
+            <div class="card-body">
+            <h5 class="card-title">{{video.name}}</h5>
+            <p class="card-text">{{video.description}}</p>
+            <button class="btn btn-danger mr-3" (click)="deleteVideo()">Eliminar</button>
+            <a href="{{video.url}}" class="btn btn-primary mr-3">Ver video</a>
+            <a href="videos/{{video.id}}/edit" class="btn btn-warning">Editar ficha</a>
+            </div>
+        </div>
+    </div>
+</div>
