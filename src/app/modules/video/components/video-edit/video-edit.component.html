@@ -39,6 +39,8 @@
                     <textarea class="form-control"  id="description" name="description"  [(ngModel)]="video.description" #name="ngModel"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary btn-block" [disabled]="!forma.valid">Modificar</button>
+                <a  class="btn btn-danger btn-block" [routerLink]="['/videos',video.id]" [state]="{ data:video }" >Cancelar</a>
+                <!--paso el state con el video para evitar que show consuma de nuevo un webservice -->
             </form>
         </div>
         <div class="col-md-4">

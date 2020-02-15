@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { VideoService } from '../../services/video.service';
 import { Video } from '../../interfaces/video.interface';
 import Swal from 'sweetalert2';
+import { noUndefined } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-video-show',
@@ -15,10 +16,26 @@ export class VideoShowComponent implements OnInit {
   video: Video = {};
 
   constructor(private activatedRoute: ActivatedRoute, private videoService: VideoService, private router: Router) {
+   /* this.activatedRoute.params.subscribe( params => {
+      console.log(params);
+      this.getVideo(params['id']);
+    });*/
+
+    if ( noUndefined(this.router.getCurrentNavigation().extras.state)) {
+      //si no esta undefined => viene el objecto por ruta
+      console.log("show, el objeto viene por ruta");
+      this.video = history.state.data;
+  }
+  else {
+    console.log("consumo el webservice en show ya que NO VIENE POR RUTA");
     this.activatedRoute.params.subscribe( params => {
       console.log(params);
       this.getVideo(params['id']);
     });
+  }
+
+
+
   }
 
   ngOnInit() {

@@ -4,6 +4,7 @@ import { VideoService } from '../../services/video.service';
 import { Video } from '../../interfaces/video.interface';
 import { NgForm } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { noUndefined } from '@angular/compiler/src/util';
 
 
 @Component({
@@ -16,13 +17,28 @@ export class VideoEditComponent implements OnInit {
   video: Video = {};
 
   constructor(private activatedRoute: ActivatedRoute, private videoService: VideoService, private router: Router) {
-    this.activatedRoute.params.subscribe( params => {
+
+    // añado la funcionalidad para venir de show a edit pasando el objeto entre rutas, para no tener
+    // que consumir de nuevo el webservice aqui, ahora, si se refresca la url del edit, se pierde ese dato
+    // por eso contemplo las dos opciones
+    if ( noUndefined(this.router.getCurrentNavigation().extras.state)) {
+        //si no esta undefined => viene el objecto por ruta
+        console.log("editar, el objeto viene por ruta");
+        this.video = history.state.data;
+    }
+    else {
+      console.log("consumo el webservice en editar ya que NO VIENE POR RUTA");
+      this.activatedRoute.params.subscribe( params => {
       console.log(params);
       this.getVideo(params['id']);
-    });
+      });
+    }
+    
   }
 
   ngOnInit() {
+    //this.video = history.state.data;
+    //console.log("esto es el video on inig",this.video);
   }
 
   getVideo(id: string) {
@@ -47,7 +63,9 @@ export class VideoEditComponent implements OnInit {
         this.video = resp.data;
         console.log('en compomente video actualizado:', this.video);
         this.launchSweetUpdated(this.video.name);
-        this.router.navigateByUrl('/videos');
+        //this.router.navigateByUrl('/videos');
+        // vuelvo al show y paso el video modificado para no consumir webservice
+        this.router.navigate(['/videos', this.video.id], {state: {data:this.video}}); 
       });
 
 

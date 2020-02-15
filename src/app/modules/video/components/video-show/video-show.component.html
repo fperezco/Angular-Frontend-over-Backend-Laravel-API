@@ -13,8 +13,9 @@
             <h5 class="card-title">{{video.name}}</h5>
             <p class="card-text">{{video.description}}</p>
             <button class="btn btn-danger mr-3" (click)="deleteVideo()">Eliminar</button>
-            <a href="{{video.url}}" class="btn btn-primary mr-3">Ver video</a>
-            <a href="videos/{{video.id}}/edit" class="btn btn-warning">Editar ficha</a>
+            <a href="{{video.url}}" class="btn btn-success mr-3">Ver video</a>
+            <a  [routerLink]="['/videos',video.id,'edit']" [state]="{ data:video }" class="btn btn-warning">Editar ficha</a>
+            <a  [routerLink]="['/videos']" class="btn btn-primary btn-block mt-3">Volver</a>
             </div>
         </div>
     </div>
