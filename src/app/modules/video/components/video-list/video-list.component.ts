@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { VideoService } from '../../services/video.service';
 import { Video } from '../../interfaces/video.interface';
+import { ActivatedRoute } from '@angular/router';
+import { VideoCategory } from '../../../video-category/interfaces/videocategory.interface';
+import { VideoCategoryService } from '../../../video-category/services/videocategory.service';
 
 @Component({
   selector: 'app-video-list',
@@ -11,16 +14,24 @@ export class VideoListComponent implements OnInit {
 
   loading = true;
   videosDisponibles: Video[] = [];
-  constructor(private videoService: VideoService) { }
+  VideoCategory: VideoCategory = {};
 
-  ngOnInit() {
-    this.getAllVideos();
+  constructor(private videoService: VideoService, private activatedRoute: ActivatedRoute, private VideoCategoryService: VideoCategoryService) { 
+    let videoCategoryId = this.activatedRoute.snapshot.queryParamMap.get("videocategory_id");
+    console.log('la categoria del video es:' ,videoCategoryId);
+    //obtengo dicha categoria
+    this.VideoCategory = this.VideoCategoryService.getVideoCategoryb
 
+
+    this.getAllVideos(this.videoCategoryId);
   }
 
-  getAllVideos() {
+  ngOnInit() {
+  }
+
+  getAllVideos(VideoCategoryId) {
     this.loading = true;
-    this.videoService.getAllVideos()
+    this.videoService.getAllVideos(this.videoCategoryId)
     .subscribe ( resp => {
       console.log(resp.data);
       for (const res of resp.data) {

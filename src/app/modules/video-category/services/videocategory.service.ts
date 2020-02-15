@@ -12,7 +12,7 @@ export class VideoCategoryService {
 
   constructor( private http: HttpClient) { }
 
-  getAllVideos(): any {
+  getAllVideosCategories(): any {
     return this.http.get(`${this.baseUrl}/videocategories/`);
   }
 
@@ -20,12 +20,12 @@ export class VideoCategoryService {
    * 
    * @param id del video en cuestion
    */
-  getVideo(id){
+  getVideoCategories(id){
     return this.http.get(`${this.baseUrl}/videocategories/${id}`);
   }
 
 
-  addVideo(video: VideoCategory){
+  addVideoCategory(video: VideoCategory){
     return this.http.post(`${this.baseUrl}/videocategories`, video)
     .pipe(
       map( (resp: any) => {
@@ -39,7 +39,7 @@ export class VideoCategoryService {
    * 
    * @param video Video
    */
-  updateVideo(video: VideoCategory){
+  updateVideoCategory(video: VideoCategory){
     return this.http.put(`${this.baseUrl}/videocategories/${video.id}`, video)
     .pipe(
       map( (resp: any) => {
@@ -48,7 +48,7 @@ export class VideoCategoryService {
     );
   }
 
-  deleteVideo(video: VideoCategory){
+  deleteVideoCategory(video: VideoCategory) {
     return this.http.delete(`${this.baseUrl}/videocategories/${video.id}`)
     .pipe(
       map( (resp: any) => {

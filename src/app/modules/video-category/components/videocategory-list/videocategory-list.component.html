@@ -21,6 +21,7 @@
                       <tr>
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
+                        <th scope="col">Videos</th>
                         <th scope="col">Tools</th>
                       </tr>
                     </thead>
@@ -28,7 +29,11 @@
                       <tr *ngFor="let videoCategory of videosDisponibles;">
                         <th scope="row">{{videoCategory.id}}</th>
                         <td>{{videoCategory.name}}</td>
-                        <td> <button class="btn btn-danger mr-3" (click)="deleteVideo()">Delete</button></td>
+                        <td><a href="videos?videocategory_id={{videoCategory.id}}" class="btn btn-success">Asoc. Videos</a></td>
+                        <td>
+                            <button class="btn btn-danger mr-3" (click)="deleteVideoCategory(videoCategory)">Delete</button>
+                            <a href="videocategories/{{videoCategory.id}}/edit" class="btn btn-warning">Editar</a>
+                        </td>
                       </tr>
                     </tbody>
                   </table>

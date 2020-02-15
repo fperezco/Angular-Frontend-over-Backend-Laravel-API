@@ -16,6 +16,10 @@ export class VideoService {
     return this.http.get(`${this.baseUrl}/videos/`);
   }
 
+  getAllVideosByVideoCategory(videoCategoryId){
+    return this.http.get(`${this.baseUrl}/videos?videocategory_id=${videoCategoryId}`);
+  }
+
   /**
    * 
    * @param id del video en cuestion
