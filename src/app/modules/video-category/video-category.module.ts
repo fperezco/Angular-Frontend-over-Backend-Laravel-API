@@ -6,15 +6,18 @@ import { VideocategoryListComponent } from './components/videocategory-list/vide
 import { VideocategoryShowComponent } from './components/videocategory-show/videocategory-show.component';
 import { FormsModule } from '@angular/forms';
 import { VideoCategoryRoutingModule } from './videocategory-routing.module';
+import { VideocategorySelectComponent } from './components/videocategory-select/videocategory-select.component';
 
 
 
 @NgModule({
-  declarations: [VideocategoryAddComponent, VideocategoryEditComponent, VideocategoryListComponent, VideocategoryShowComponent],
+  declarations: [VideocategoryAddComponent, VideocategoryEditComponent, VideocategoryListComponent, VideocategoryShowComponent, VideocategorySelectComponent],
   imports: [
     CommonModule,
     FormsModule,
     VideoCategoryRoutingModule
-  ]
+  ],
+  exports: [VideocategorySelectComponent] //lo exporto para usarlo en video add
+
 })
 export class VideoCategoryModule { }

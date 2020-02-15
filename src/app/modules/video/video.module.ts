@@ -6,6 +6,7 @@ import { VideoShowComponent } from './components/video-show/video-show.component
 import { VideoEditComponent } from './components/video-edit/video-edit.component';
 import { VideoRoutingModule } from './video-routing.module';
 import { FormsModule } from '@angular/forms';
+import { VideoCategoryModule } from '../video-category/video-category.module';
 
 
 
@@ -14,7 +15,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     FormsModule,
-    VideoRoutingModule
+    VideoRoutingModule,
+    VideoCategoryModule //para usar el videocategoryselectcomponent en video add y video edit
   ]
 })
 export class VideoModule { }
