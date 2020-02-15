@@ -17,21 +17,21 @@ export class VideoListComponent implements OnInit {
   VideoCategory: VideoCategory = {};
 
   constructor(private videoService: VideoService, private activatedRoute: ActivatedRoute, private VideoCategoryService: VideoCategoryService) { 
-    let videoCategoryId = this.activatedRoute.snapshot.queryParamMap.get("videocategory_id");
+    /*let videoCategoryId = this.activatedRoute.snapshot.queryParamMap.get("videocategory_id");
     console.log('la categoria del video es:' ,videoCategoryId);
     //obtengo dicha categoria
     this.VideoCategory = this.VideoCategoryService.getVideoCategoryb
+*/
 
-
-    this.getAllVideos(this.videoCategoryId);
+    this.getAllVideos();
   }
 
   ngOnInit() {
   }
 
-  getAllVideos(VideoCategoryId) {
+  getAllVideos() {
     this.loading = true;
-    this.videoService.getAllVideos(this.videoCategoryId)
+    this.videoService.getAllVideos()
     .subscribe ( resp => {
       console.log(resp.data);
       for (const res of resp.data) {
