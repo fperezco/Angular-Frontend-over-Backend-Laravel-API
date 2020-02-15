@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     FormsModule,
     VideoRoutingModule
-  ]
+  ],
+  //exports:[VideoListComponent] //lo exporto aki para usarlo en el videocategory
 })
 export class VideoModule { }

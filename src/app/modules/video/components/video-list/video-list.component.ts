@@ -14,6 +14,7 @@ export class VideoListComponent implements OnInit {
 
   loading = true;
   videosDisponibles: Video[] = [];
+  selectedVideo: Video = null;
   VideoCategory: VideoCategory = {};
 
   constructor(private videoService: VideoService, private activatedRoute: ActivatedRoute, private VideoCategoryService: VideoCategoryService) { 
@@ -47,6 +48,33 @@ export class VideoListComponent implements OnInit {
       console.log('los videos son');
       console.log(this.videosDisponibles);
     });
+  }
+
+  /**
+   * Al hacer click en un video seteo como seleccionado el video en cuestion y muestro los detalles
+   * @param video 
+   */
+  clickOnVideo(video: Video) {
+    console.log("seteo el seleccionado a video:",video);
+    this.selectedVideo = video;
+  }
+
+  /**
+   * NO ME GUSTA NADA ESTE METODO QUE SIRVE PARA NOTIFICA REL BORRADO AL PADRE Y PARA DESSELECCIONAR EL VIDEO... TU SABE...
+   * Recibo los eventos de los hijos, en este caso del show que al pinchar en back setea a nulo el video seleccionado, disparando de nuevo 
+   * que aparezaca el listado de videos sin consumir el webservice
+   * @param $event 
+   */
+  receiveMessage(event) {
+    console.log("cambio en video seleccionado, puede que hayamos pinchado back o venga deleted, event = ", event);
+    // si del show me notifican que he borrado el video => lo quito del array de memoria
+    if(event == "deleted"){
+      console.log("borramos el video");
+      this.videosDisponibles.splice(this.videosDisponibles.indexOf(this.selectedVideo), 1);
+    }
+    // sea como fuere, terminaron las operaciones en el show => lo escondo y muestro el listado
+    this.selectedVideo = null;
+    
   }
 
 }

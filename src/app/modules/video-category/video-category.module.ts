@@ -6,6 +6,7 @@ import { VideocategoryListComponent } from './components/videocategory-list/vide
 import { VideocategoryShowComponent } from './components/videocategory-show/videocategory-show.component';
 import { FormsModule } from '@angular/forms';
 import { VideoCategoryRoutingModule } from './videocategory-routing.module';
+import { VideoModule } from '../video/video.module';
 
 
 

@@ -2,18 +2,14 @@
     <div class="row float-right">
         <a href="videos/new" class="btn btn-outline-success my-2 my-sm-0">New Video Category</a>
     </div>
-    <ng-container *ngIf="loading; else elseTemplate">
-        <div name="loading" id="loading" *ngIf="loading" class="d-flex justify-content-center">
-            <div class="spinner-border" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
+
+    <div name="loading" id="loading" *ngIf="loading" class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
         </div>
-    </ng-container>
-♂
-    <ng-template #elseTemplate>    
-        <div class="row">
-            <h1>Video Categories</h1>
-        </div>
+    </div>
+
+    <div *ngIf="!loading">
         <div class="row">
             <div class="col-12">
                 <table class="table">
@@ -30,6 +26,7 @@
                         <th scope="row">{{videoCategory.id}}</th>
                         <td>{{videoCategory.name}}</td>
                         <td><a href="videos?videocategory_id={{videoCategory.id}}" class="btn btn-success">Asoc. Videos</a></td>
+                        <!-- <td><button (click)="selectCategory(videoCategory)" class="btn btn-success">Asoc. Videos</button></td>-->
                         <td>
                             <button class="btn btn-danger mr-3" (click)="deleteVideoCategory(videoCategory)">Delete</button>
                             <a href="videocategories/{{videoCategory.id}}/edit" class="btn btn-warning">Editar</a>
@@ -38,8 +35,6 @@
                     </tbody>
                   </table>
             </div>
-    
-        </div>
-    </ng-template>
-    
+        </div>    
+    </div>    
 </div>
