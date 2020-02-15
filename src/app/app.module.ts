@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routes';
 import { SharedModule } from './modules/shared/shared.module';
 import { VideoModule } from './modules/video/video.module';
+import { VideoCategoryModule } from './modules/video-category/video-category.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { VideoModule } from './modules/video/video.module';
     AppRoutingModule,
     HttpClientModule,
     SharedModule,
-    VideoModule
+    VideoModule,
+    VideoCategoryModule
   ],
   providers: [],
   bootstrap: [AppComponent]
