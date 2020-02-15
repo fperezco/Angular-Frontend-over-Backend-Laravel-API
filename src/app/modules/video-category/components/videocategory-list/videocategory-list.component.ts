@@ -13,6 +13,7 @@ export class VideocategoryListComponent implements OnInit {
 
   loading = true;
   videosDisponibles: VideoCategory[] = [];
+
   constructor(private videoCategoryService: VideoCategoryService, private router: Router) { }
 
   ngOnInit() {
@@ -87,8 +88,4 @@ export class VideocategoryListComponent implements OnInit {
       text: `Se eliminó correctamente ${name}`
     });
   }
-
-
-
-
 }
