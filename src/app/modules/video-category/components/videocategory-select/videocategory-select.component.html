@@ -1,14 +1,27 @@
 <div class="form-group">
     <label for="videocategory_id">Categoria Video</label>
-    <select class="form-control" id="videocategory_id" [name]="nameForm"  name="videocategory_id" [id]="idForm" [(ngModel)]="model" #select>
+    <select class="form-control" id="videocategory_id" name="videocategory_id" [ngModel]=model (ngModelChange)="updateData($event)" name="select" #select="ngModel" required
+     [ngClass]="{'is-invalid':  (select.errors?.required) && select.touched , 'is-valid': (!select.errors?.required)}">
         <option value="">Elegir...</option>
         <option *ngFor="let videoCategory of videoCategories" value="{{videoCategory.id}}">{{videoCategory.name}}</option>
     </select>
     <div *ngIf="select.errors?.required && select.touched" class="invalid-feedback">
         Ha de seleccionar una categoria
     </div>
-
-    <pre>{{videoCategorySelectedId}}</pre>
-
-    
 </div>
+
+
+<!--
+    <div class="form-group">
+    <label for="videocategory_id">Categoria Video</label>
+    <select class="form-control" id="videocategory_id"  [(ngModel)]="video.videocategory_id" name="videocategory_id" #videocategory_id="ngModel" required
+     [ngClass]="{'is-invalid':  (videocategory_id.errors?.required) && videocategory_id.touched , 'is-valid': (!videocategory_id.errors?.required)}">
+        <option value="">Elegir...</option>
+        <option *ngFor="let videoCategory of videoCategories" value="{{videoCategory.id}}">{{videoCategory.name}}</option>
+    </select>
+    <div *ngIf="videocategory_id.errors?.required && videocategory_id.touched" class="invalid-feedback">
+        Ha de seleccionar una categoria
+    </div>
+</div>
+
+-->

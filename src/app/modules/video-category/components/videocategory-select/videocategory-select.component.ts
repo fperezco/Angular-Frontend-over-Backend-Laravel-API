@@ -1,31 +1,30 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { VideoCategory } from '../../interfaces/videocategory.interface';
 import { VideoCategoryService } from '../../services/videocategory.service';
-import { NgForm, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-videocategory-select',
   templateUrl: './videocategory-select.component.html',
-  styleUrls: ['./videocategory-select.component.css'],
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    multi: true,
-    useExisting: VideocategorySelectComponent
-  }]
+  styleUrls: ['./videocategory-select.component.css']
 })
 
 
 
-export class VideocategorySelectComponent implements ControlValueAccessor, OnInit {
+export class VideocategorySelectComponent implements  OnInit {
 
-  @ViewChild('select') input: ElementRef;
-  
+
   // puede venir del componente padre el elto seleccionado
-  @Input() videoCategorySelectedId;
   @Input() model;
-  @Input() nameForm;
-  @Input() idForm;
   videoCategories: VideoCategory[] = [];
+
+      // note that this must be named as the input name + "Change"
+      @Output() modelChange: any = new EventEmitter();
+
+      updateData(event) {
+        this.model = event;
+        this.modelChange.emit(event);
+        console.log("en hijo, model change",event);
+      }
 
   
   constructor(private videoCategoryService: VideoCategoryService) { 
@@ -33,10 +32,7 @@ export class VideocategorySelectComponent implements ControlValueAccessor, OnIni
   }
 
   ngOnInit() {
-    console.log("viene como preseleccionada la categoria", this.videoCategorySelectedId);
     console.log("viene como model", this.model);
-    console.log("viene como name", this.nameForm);
-    console.log("viene como id", this.idForm);
     this.getAllVideos();
 
   }
@@ -57,23 +53,4 @@ export class VideocategorySelectComponent implements ControlValueAccessor, OnIni
       console.log(this.videoCategories);
     });
   }
-
-  // metodos obligados a implementar por la interfaz
-
-  writeValue(obj: any): void {
-    this.input.nativeElement.value = obj;
-  }
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
-  setDisabledState?(isDisabled: boolean): void {
-    this.disabled = isDisabled;
-  }
-  onChange(event) { }
-
-  onTouched() { }
-
 }

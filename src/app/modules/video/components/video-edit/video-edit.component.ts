@@ -131,5 +131,9 @@ export class VideoEditComponent implements OnInit {
     });
   }
 
+  mostrarForma(forma: NgForm){
+    console.log("holaaa");
+    console.log(forma);
+  }
 
 }
