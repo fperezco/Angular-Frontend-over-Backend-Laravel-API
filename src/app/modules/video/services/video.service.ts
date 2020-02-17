@@ -29,7 +29,8 @@ export class VideoService {
   }
 
 
-  addVideo(video: Video){
+  addVideo(video: Video) {
+    console.log("Invocada la creacion de un video");
     return this.http.post(`${this.baseUrl}/videos`, video)
     .pipe(
       map( (resp: any) => {

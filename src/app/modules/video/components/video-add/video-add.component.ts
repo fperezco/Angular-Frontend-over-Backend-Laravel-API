@@ -18,23 +18,33 @@ export class VideoAddComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * Metodo addVideo, invocado desde el componente formulario hijo, envia el formuario por Output hacia este método del padre
+   * @param forma NgForm
+   */
   addVideo(forma: NgForm){
-    console.log( 'ngForm' , forma);
+    console.log("invocado ADDvideo");
+    if(forma.value){
 
-    console.log('esto es lo que tengo ');
-    console.log(forma.value);
-
-    this.launchSweetUpdating();
-    this.video.user_id = 3;     //OJOOOO AKI!!!!!!!!!!!! A ESTO!!!!!!!!!!
-    this.video.videocategory_id = 3;
-
-    this.videoService.addVideo(this.video)
-      .subscribe(  (resp: any) => {
-        this.video = resp.data;
-        console.log('en compomente video actualizado:', this.video);
-        this.launchSweetUpdated(this.video.name);
-        this.router.navigateByUrl('/videos');
-      });
+  
+      console.log( 'ngForm' , forma);
+  
+      console.log('esto es lo que tengo ');
+      console.log(forma.value);
+  
+      this.launchSweetUpdating();
+      this.video.user_id = 3;     //OJOOOO AKI!!!!!!!!!!!! A ESTO!!!!!!!!!!
+      //this.video.videocategory_id = 3;
+  
+      this.videoService.addVideo(this.video)
+        .subscribe(  (resp: any) => {
+          this.video = resp.data;
+          console.log('en compomente video actualizado:', this.video);
+          this.launchSweetUpdated(this.video.name);
+          this.router.navigateByUrl('/videos');
+        });
+  
+    }
 
 
   }

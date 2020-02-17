@@ -4,9 +4,8 @@ class="form-control"
 [disabled]="isDisabled"
 (input)="onInput($event.target.value)"
 [ngClass]=clase>
-
-<option value="">Elegir...</option>
-<option *ngFor="let videoCategory of videoCategories" value="{{videoCategory.id}}" [selected]="videoCategory.id == value" >{{videoCategory.name}}</option>
+    <option value="">Elegir...</option>
+    <option *ngFor="let videoCategory of videoCategories" value="{{videoCategory.id}}" [selected]="videoCategory.id == value" >{{videoCategory.name}}</option>
 </select>
 
 

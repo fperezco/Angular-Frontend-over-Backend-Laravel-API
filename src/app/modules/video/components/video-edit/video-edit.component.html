@@ -1,25 +1,15 @@
 <div class="container  mt-5">
-
     <app-loader [loading]="loading"></app-loader>
-
     <div class="row" *ngIf="!loading">
         <div class="col-md-6">
-            <form (ngSubmit)="updateVideo(forma)" novalidate="" #forma="ngForm">
-
-                <app-videoform [video]="video"></app-videoform>
-
-
-                <button type="submit" class="btn btn-primary btn-block" [disabled]="!forma.valid">Modificar</button>
-                <a  class="btn btn-danger btn-block" [routerLink]="['/videos',video.id]" [state]="{ data:video }" >Cancelar</a>
+            <app-videoform [modelo]="video"  (childSubmit)="updateVideo($event)"> [nbrBoton]="'Updatear'"></app-videoform>     
+            <a class="btn btn-danger btn-block mt-1" [routerLink]="['/videos',video.id]" [state]="{ data:video }" >Cancelar</a>
                 <!--paso el state con el video para evitar que show consuma de nuevo un webservice -->
-            </form>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4" *ngIf="video.picture">
             <img class="img-thumbnail" [src]="video.picture">
         </div>
     </div>
-
     <pre>{{video |json}}</pre>
-
 </div>
 
