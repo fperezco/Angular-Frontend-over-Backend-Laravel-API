@@ -1,144 +1,80 @@
-<div class="container  mt-5">
 
-    <div name="loading" id="loading" *ngIf="loading" class="d-flex justify-content-center">
-        <div class="spinner-border" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
+<!--<div class="form-group">
+    <label for="videocategory_id">Categoria Video</label>
+    <select class="form-control" id="videocategory_id"  [(ngModel)]="video.videocategory_id" name="videocategory_id" #videocategory_id="ngModel" required
+        [ngClass]="{'is-invalid':  (videocategory_id.errors?.required) && videocategory_id.touched , 'is-valid': (!videocategory_id.errors?.required)}">
+        <option value="">Elegir...</option>
+        <option *ngFor="let videoCategory of videoCategories" value="{{videoCategory.id}}">{{videoCategory.name}}</option>
+    </select>
+    <div *ngIf="videocategory_id.errors?.required && videocategory_id.touched" class="invalid-feedback">
+        Ha de seleccionar una categoria
     </div>
-
-    <div class="row" *ngIf="!loading">
-        <div class="col-md-6">
-            <form (ngSubmit)="updateVideo(forma)" novalidate="" #forma="ngForm">
-
-                <!--
-                componente input reciclable
-                <div class="form-group">
-                    <label for="videocategory_id">Categoria Video</label>
-                    <app-videocategory-select-cvl 
-                    name="categoria" 
-                    [clase]="{'is-invalid':  ( categoria.errors?.required) && categoria.touched , 'is-valid': (!categoria.errors?.required)}"
-                    [ngClass]="{'is-invalid':  ( categoria.errors?.required) && categoria.touched , 'is-valid': (!categoria.errors?.required)}"
-                    required
-                    #categoria="ngModel"
-                    [(ngModel)]="video.videocategory_id">
-                    </app-videocategory-select-cvl>
-    
-            
-                    <div *ngIf="categoria.errors?.required && categoria.touched" class="invalid-feedback">
-                        Este campo es requerido
-                    </div>
-                </div>
-                -->
-                
-
-                <!--<app-videocategory-select [(model)]="video.videocategory_id" ></app-videocategory-select>-->
-                
-                <!--<app-videocategory-select-cvl name="yea" required [(ngModel)]="video.videocategory_id"></app-videocategory-select-cvl>
-                -->
-                
-                
-                <div class="form-group">
-                    <label for="videocategory_id">Categoria Video</label>
-                    <select class="form-control" id="videocategory_id"  [(ngModel)]="video.videocategory_id" name="videocategory_id" #videocategory_id="ngModel" required
-                     [ngClass]="{'is-invalid':  (videocategory_id.errors?.required) && videocategory_id.touched , 'is-valid': (!videocategory_id.errors?.required)}">
-                        <option value="">Elegir...</option>
-                        <option *ngFor="let videoCategory of videoCategories" value="{{videoCategory.id}}">{{videoCategory.name}}</option>
-                    </select>
-                    <div *ngIf="videocategory_id.errors?.required && videocategory_id.touched" class="invalid-feedback">
-                        Ha de seleccionar una categoria
-                    </div>
-                </div>
-
-            
-
-
-                <!--
-                <div class="form-group">
-                    <label for="videocategory_id">Categoria Video</label>
-                    <app-videocategory-select 
-                    name="categoria" 
-                    [(ngModel)]="video.videocategory_id"
-                    [clase]="{'is-invalid':  ( categoria.errors?.required) && categoria.touched , 'is-valid': (!categoria.errors?.required)}"
-                    [ngClass]="{'is-invalid':  ( categoria.errors?.required) && categoria.touched , 'is-valid': (!categoria.errors?.required)}"
-                    required
-                    #categoria="ngModel"
-                    >
-                    </app-videocategory-select>
-    
-            
-                    <div *ngIf="categoria.errors?.required && categoria.touched" class="invalid-feedback">
-                        Este campo es requerido
-                    </div>
-                </div> 
-            -->
+</div>-->
 
 
 
-        <!--
-    <input
-                name="yea"
-                [(ngModel)]="video.videocategory_id"
-    type="number"
+<div class="form-group">
+    <label for="videocategory_id">Categoria Video</label>
+    <app-videocategory-select 
+    name="categoria" 
+    [(ngModel)]="video.videocategory_id"
+    [clase]="{'is-invalid':  ( categoria.errors?.required) && categoria.touched , 'is-valid': (!categoria.errors?.required)}"
+    [ngClass]="{'is-invalid':  ( categoria.errors?.required) && categoria.touched , 'is-valid': (!categoria.errors?.required)}"
     required
-    >-->
+    #categoria="ngModel"
+    >
+    </app-videocategory-select>
 
-    <!-- <div class="form-group">
-        <label for="videocategory_id">Categoria Video</label>
-    
-        <input class="form-control"
-        name="yea"
-        [(ngModel)]="video.videocategory_id"
-type="text"
-required #categoria="ngModel"
-[ngClass]="{'is-invalid':  (categoria.errors?.minlength || categoria.errors?.required) && categoria.touched , 'is-valid': (!categoria.errors?.minlength && !categoria.errors?.required)}"
->
-      <div *ngIf="categoria.errors?.required && categoria.touched" class="invalid-feedback">
+
+    <div *ngIf="categoria.errors?.required && categoria.touched" class="invalid-feedback">
         Este campo es requerido
-      </div>
-    
-    
-    </div>-->
-
-
-                <div class="form-group">
-                    <label for="nombre">Nombre</label>
-                    <input class="form-control" [ngClass]="{'is-invalid':  (nombre.errors?.minlength || nombre.errors?.required) && nombre.touched , 'is-valid': (!nombre.errors?.minlength && !nombre.errors?.required)}" type="text" placeholder="nombre" name="nombre" [(ngModel)]="video.name"
-                    required minlength=5 #nombre="ngModel">
-                    <div *ngIf="nombre.errors?.required && nombre.touched" class="invalid-feedback">
-                        Este campo es requerido
-                    </div>
-                    <div *ngIf="nombre.errors?.minlength" class="invalid-feedback">
-                        Al menos {{nombre.errors.minlength.requiredLength}} caracteres
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="url">Url</label>
-                    <input class="form-control" [ngClass]="{'is-invalid':  (url.errors?.minlength || url.errors?.required) && url.touched , 'is-valid': (!url.errors?.minlength && !url.errors?.required)}" type="text" placeholder="url" name="url" [(ngModel)]="video.url"
-                    required minlength=5 #url="ngModel">
-                    <div *ngIf="url.errors?.required && url.touched" class="invalid-feedback">
-                        Este campo es requerido
-                    </div>
-                    <div *ngIf="url.errors?.minlength" class="invalid-feedback">
-                        Al menos {{url.errors.minlength.requiredLength}} caracteres
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="description">Descripcion</label>
-                    <textarea class="form-control"  id="description" name="description"  [(ngModel)]="video.description" ></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary btn-block" [disabled]="!forma.valid">Modificar</button>
-                <a  class="btn btn-danger btn-block" [routerLink]="['/videos',video.id]" [state]="{ data:video }" >Cancelar</a>
-                <!--paso el state con el video para evitar que show consuma de nuevo un webservice -->
-            </form>
-        </div>
-        <div class="col-md-4">
-            <img class="img-thumbnail" [src]="video.picture">
-        </div>
     </div>
+</div> 
 
-    <pre>{{video |json}}</pre>
 
+<div class="form-group">
+    <label for="nombre">Nombre</label>
+    <input class="form-control" [ngClass]="{'is-invalid':  (nombre.errors?.minlength || nombre.errors?.required) && nombre.touched , 'is-valid': (!nombre.errors?.minlength && !nombre.errors?.required)}" type="text" placeholder="nombre" name="nombre" [(ngModel)]="video.name"
+    required minlength=5 #nombre="ngModel">
+    <div *ngIf="nombre.errors?.required && nombre.touched" class="invalid-feedback">
+        Este campo es requerido
+    </div>
+    <div *ngIf="nombre.errors?.minlength" class="invalid-feedback">
+        Al menos {{nombre.errors.minlength.requiredLength}} caracteres
+    </div>
 </div>
+
+<div class="form-group">
+    <label for="url">Url</label>
+    <input class="form-control" [ngClass]="{'is-invalid':  (url.errors?.minlength || url.errors?.required) && url.touched , 'is-valid': (!url.errors?.minlength && !url.errors?.required)}" type="text" placeholder="url" name="url" [(ngModel)]="video.url"
+    required minlength=5 #url="ngModel">
+    <div *ngIf="url.errors?.required && url.touched" class="invalid-feedback">
+        Este campo es requerido
+    </div>
+    <div *ngIf="url.errors?.minlength" class="invalid-feedback">
+        Al menos {{url.errors.minlength.requiredLength}} caracteres
+    </div>
+</div>
+
+
+<div class="form-group">
+    <label for="picture">Picture</label>
+    <input class="form-control" [ngClass]="{'is-invalid':  (picture.errors?.minlength || picture.errors?.required) && picture.touched , 'is-valid': (!picture.errors?.minlength && !picture.errors?.required)}" type="text" placeholder="picture" name="picture" [(ngModel)]="video.picture"
+    required minlength=5 #picture="ngModel">
+    <div *ngIf="picture.errors?.required && picture.touched" class="invalid-feedback">
+        Este campo es requerido
+    </div>
+    <div *ngIf="picture.errors?.minlength" class="invalid-feedback">
+        Al menos {{picture.errors.minlength.requiredLength}} caracteres
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="description">Descripcion</label>
+    <textarea class="form-control"  id="description" name="description"  [(ngModel)]="video.description" ></textarea>
+</div>
+
+
+
+
 

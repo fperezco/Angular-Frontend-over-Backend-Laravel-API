@@ -8,6 +8,7 @@ import { VideoRoutingModule } from './video-routing.module';
 import { FormsModule } from '@angular/forms';
 import { VideoCategoryModule } from '../video-category/video-category.module';
 import { VideoformComponent } from './components/forms/videoform/videoform.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -17,7 +18,8 @@ import { VideoformComponent } from './components/forms/videoform/videoform.compo
     CommonModule,
     FormsModule,
     VideoRoutingModule,
-    VideoCategoryModule //para usar el videocategoryselectcomponent en video add y video edit
+    VideoCategoryModule, //para usar el videocategoryselectcomponent en video add y video edit,
+    SharedModule //para usar el componente loader
   ]
 })
 export class VideoModule { }

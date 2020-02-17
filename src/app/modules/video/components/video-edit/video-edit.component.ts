@@ -15,7 +15,7 @@ import { VideoCategoryService } from '../../../video-category/services/videocate
   styleUrls: ['./video-edit.component.css']
 })
 export class VideoEditComponent implements OnInit {
-  loading = true;
+  loading = false;
 
   // EDIT POR COJONES NO TENDRA QUE TRAER NUNCA NUEVOS ATRIBUTOS SI VIENE DE SHOW,
   // ESO SEGURISIMO YA QUE SHOW MOSTRARÁ TODOS LOS ATRIBUTOS DEL OBJETO
@@ -34,10 +34,8 @@ export class VideoEditComponent implements OnInit {
   }
 
 
-  videoCategories: VideoCategory[] = [];
 
-
-  constructor(private activatedRoute: ActivatedRoute, private videoService: VideoService, private router: Router,private videoCategoryService: VideoCategoryService) {
+  constructor(private activatedRoute: ActivatedRoute, private videoService: VideoService, private router: Router) {
 
     // añado la funcionalidad para venir de show a edit pasando el objeto entre rutas, para no tener
     // que consumir de nuevo el webservice aqui, ahora, si se refresca la url del edit, se pierde ese dato
@@ -61,27 +59,6 @@ export class VideoEditComponent implements OnInit {
   ngOnInit() {
     //this.video = history.state.data;
     //console.log("esto es el video on inig",this.video);
-    this.getAllVideos();
-  }
-
-
-  getAllVideos() {
-    this.loading=true;
-    console.log("obteniendo listado de videos");
-    this.videoCategoryService.getAllVideosCategories()
-    .subscribe ( resp => {
-      console.log(resp.data);
-      for (const res of resp.data) {
-          const video: VideoCategory = {};
-          video.id = res.id;
-          video.name = res.name;
-          this.videoCategories.push(video);
-      }
-
-      console.log('los videos son');
-      console.log(this.videoCategories);
-      this.loading=false;
-    });
   }
 
 

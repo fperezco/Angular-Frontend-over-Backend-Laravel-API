@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Video } from '../../../interfaces/video.interface';
 
 @Component({
   selector: 'app-videoform',
@@ -7,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VideoformComponent implements OnInit {
 
+  @Input() video: Video = {};
+  
   constructor() { }
 
   ngOnInit() {

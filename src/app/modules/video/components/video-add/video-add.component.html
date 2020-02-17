@@ -3,47 +3,9 @@
     <div class="row">
         <div class="col-md-6">
             <form (ngSubmit)="addVideo(forma)" novalidate="" #forma="ngForm">
-                <div class="form-group">
-                    <label for="nombre">Nombre</label>
-                    <input class="form-control" [ngClass]="{'is-invalid':  (nombre.errors?.minlength || nombre.errors?.required) && nombre.touched , 'is-valid': (!nombre.errors?.minlength && !nombre.errors?.required)}" type="text" placeholder="nombre" name="nombre" [(ngModel)]="video.name"
-                    required minlength=5 #nombre="ngModel">
-                    <div *ngIf="nombre.errors?.required && nombre.touched" class="invalid-feedback">
-                        Este campo es requerido
-                    </div>
-                    <div *ngIf="nombre.errors?.minlength" class="invalid-feedback">
-                        Al menos {{nombre.errors.minlength.requiredLength}} caracteres
-                    </div>
-                </div>
+                
+                <app-videoform [video]="video"></app-videoform>     
 
-
-                <div class="form-group">
-                    <label for="url">Url</label>
-                    <input class="form-control" [ngClass]="{'is-invalid':  (url.errors?.minlength || url.errors?.required) && url.touched , 'is-valid': (!url.errors?.minlength && !url.errors?.required)}" type="text" placeholder="url" name="url" [(ngModel)]="video.url"
-                    required minlength=5 #url="ngModel">
-                    <div *ngIf="url.errors?.required && url.touched" class="invalid-feedback">
-                        Este campo es requerido
-                    </div>
-                    <div *ngIf="url.errors?.minlength" class="invalid-feedback">
-                        Al menos {{url.errors.minlength.requiredLength}} caracteres
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="picture">Picture</label>
-                    <input class="form-control" [ngClass]="{'is-invalid':  (picture.errors?.minlength || picture.errors?.required) && picture.touched , 'is-valid': (!picture.errors?.minlength && !picture.errors?.required)}" type="text" placeholder="picture" name="picture" [(ngModel)]="video.picture"
-                    required minlength=5 #picture="ngModel">
-                    <div *ngIf="picture.errors?.required && picture.touched" class="invalid-feedback">
-                        Este campo es requerido
-                    </div>
-                    <div *ngIf="picture.errors?.minlength" class="invalid-feedback">
-                        Al menos {{picture.errors.minlength.requiredLength}} caracteres
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="description">Descripcion</label>
-                    <textarea class="form-control"  id="description" name="description"  [(ngModel)]="video.description" #name="ngModel"></textarea>
-                </div>
                 <button type="submit" class="btn btn-primary btn-block" [disabled]="!forma.valid">Guardar</button>
             </form>
         </div>
