@@ -6,6 +6,7 @@ import { NgForm } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { noUndefined } from '@angular/compiler/src/util';
 import { VideoCategory } from '../../../video-category/interfaces/videocategory.interface';
+import { VideoCategoryService } from '../../../video-category/services/videocategory.service';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { VideoCategory } from '../../../video-category/interfaces/videocategory.
   styleUrls: ['./video-edit.component.css']
 })
 export class VideoEditComponent implements OnInit {
-  loading = false;
+  loading = true;
 
   // EDIT POR COJONES NO TENDRA QUE TRAER NUNCA NUEVOS ATRIBUTOS SI VIENE DE SHOW,
   // ESO SEGURISIMO YA QUE SHOW MOSTRARÁ TODOS LOS ATRIBUTOS DEL OBJETO
@@ -33,30 +34,10 @@ export class VideoEditComponent implements OnInit {
   }
 
 
-  videoCategories: VideoCategory[] = [
-    {
-    "id": 1,
-    "name": 'yea'
-    },
-    {
-      "id": 2,
-      "name": 'yea22'
-      },
-      {
-        "id": 3,
-        "name": 'yea33'
-        },
-        {
-          "id": 4,
-          "name": 'yea44'
-          },
-          {
-            "id": 5,
-            "name": 'yea55'
-            }
-];
+  videoCategories: VideoCategory[] = [];
 
-  constructor(private activatedRoute: ActivatedRoute, private videoService: VideoService, private router: Router) {
+
+  constructor(private activatedRoute: ActivatedRoute, private videoService: VideoService, private router: Router,private videoCategoryService: VideoCategoryService) {
 
     // añado la funcionalidad para venir de show a edit pasando el objeto entre rutas, para no tener
     // que consumir de nuevo el webservice aqui, ahora, si se refresca la url del edit, se pierde ese dato
@@ -74,12 +55,35 @@ export class VideoEditComponent implements OnInit {
       });
     }
     
+    console.log("loading===",this.loading);
   }
 
   ngOnInit() {
     //this.video = history.state.data;
     //console.log("esto es el video on inig",this.video);
+    this.getAllVideos();
   }
+
+
+  getAllVideos() {
+    this.loading=true;
+    console.log("obteniendo listado de videos");
+    this.videoCategoryService.getAllVideosCategories()
+    .subscribe ( resp => {
+      console.log(resp.data);
+      for (const res of resp.data) {
+          const video: VideoCategory = {};
+          video.id = res.id;
+          video.name = res.name;
+          this.videoCategories.push(video);
+      }
+
+      console.log('los videos son');
+      console.log(this.videoCategories);
+      this.loading=false;
+    });
+  }
+
 
   getVideo(id: string) {
     this.loading = true;
@@ -130,7 +134,6 @@ export class VideoEditComponent implements OnInit {
       text: 'Se actualizo correctamente'
     });
   }
-
 
 
 }

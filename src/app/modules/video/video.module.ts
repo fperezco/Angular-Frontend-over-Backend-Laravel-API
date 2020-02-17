@@ -7,11 +7,12 @@ import { VideoEditComponent } from './components/video-edit/video-edit.component
 import { VideoRoutingModule } from './video-routing.module';
 import { FormsModule } from '@angular/forms';
 import { VideoCategoryModule } from '../video-category/video-category.module';
+import { VideoformComponent } from './components/forms/videoform/videoform.component';
 
 
 
 @NgModule({
-  declarations: [VideoListComponent, VideoAddComponent, VideoShowComponent, VideoEditComponent],
+  declarations: [VideoListComponent, VideoAddComponent, VideoShowComponent, VideoEditComponent, VideoformComponent],
   imports: [
     CommonModule,
     FormsModule,
