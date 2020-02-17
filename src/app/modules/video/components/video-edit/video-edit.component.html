@@ -10,7 +10,23 @@
         <div class="col-md-6">
             <form (ngSubmit)="updateVideo(forma)" novalidate="" #forma="ngForm">
 
-                <app-videocategory-select [videoCategorySelectedId]="video.videocategory_id" name="videocategory_id" ngModel="video.videocategory_id" ></app-videocategory-select>
+                <app-videocategory-select [model]="video.videocategory_id" [nameForm]="'videocategory_id'" [idForm]="'videocategory_id'" ></app-videocategory-select> 
+
+               <!--<div class="form-group">
+                <label for="videocategory_id">Categoria Video</label>
+                <select class="form-control" id="videocategory_id" name="videocategory_id" [(ngModel)]="video.videocategory_id" #select>
+                    <option value="">Elegir...</option>
+                    <option *ngFor="let videoCategory of videoCategories" value="{{videoCategory.id}}">{{videoCategory.name}}</option>
+                </select>
+                <div *ngIf="select.errors?.required && select.touched" class="invalid-feedback">
+                    Ha de seleccionar una categoria
+                </div>
+            
+        
+            
+                
+            </div>-->
+            
 
             
                 <div class="form-group">
@@ -24,7 +40,6 @@
                         Al menos {{nombre.errors.minlength.requiredLength}} caracteres
                     </div>
                 </div>
-
 
                 <div class="form-group">
                     <label for="url">Url</label>
@@ -40,7 +55,7 @@
 
                 <div class="form-group">
                     <label for="description">Descripcion</label>
-                    <textarea class="form-control"  id="description" name="description"  [(ngModel)]="video.description" #name="ngModel"></textarea>
+                    <textarea class="form-control"  id="description" name="description"  [(ngModel)]="video.description" ></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary btn-block" [disabled]="!forma.valid">Modificar</button>
                 <a  class="btn btn-danger btn-block" [routerLink]="['/videos',video.id]" [state]="{ data:video }" >Cancelar</a>
@@ -52,6 +67,7 @@
         </div>
     </div>
 
+    <pre>{{video |json}}</pre>
 
     
 </div>

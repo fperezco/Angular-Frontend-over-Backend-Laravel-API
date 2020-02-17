@@ -5,6 +5,7 @@ import { Video } from '../../interfaces/video.interface';
 import { NgForm } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { noUndefined } from '@angular/compiler/src/util';
+import { VideoCategory } from '../../../video-category/interfaces/videocategory.interface';
 
 
 @Component({
@@ -30,6 +31,30 @@ export class VideoEditComponent implements OnInit {
   notifyEndEdition() {
     this.messageEvent.emit(null);
   }
+
+
+  videoCategories: VideoCategory[] = [
+    {
+    "id": 1,
+    "name": 'yea'
+    },
+    {
+      "id": 2,
+      "name": 'yea22'
+      },
+      {
+        "id": 3,
+        "name": 'yea33'
+        },
+        {
+          "id": 4,
+          "name": 'yea44'
+          },
+          {
+            "id": 5,
+            "name": 'yea55'
+            }
+];
 
   constructor(private activatedRoute: ActivatedRoute, private videoService: VideoService, private router: Router) {
 

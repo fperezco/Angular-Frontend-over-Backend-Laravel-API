@@ -22,13 +22,21 @@ export class VideocategorySelectComponent implements ControlValueAccessor, OnIni
   
   // puede venir del componente padre el elto seleccionado
   @Input() videoCategorySelectedId;
+  @Input() model;
+  @Input() nameForm;
+  @Input() idForm;
   videoCategories: VideoCategory[] = [];
+
+  
   constructor(private videoCategoryService: VideoCategoryService) { 
 
   }
 
   ngOnInit() {
     console.log("viene como preseleccionada la categoria", this.videoCategorySelectedId);
+    console.log("viene como model", this.model);
+    console.log("viene como name", this.nameForm);
+    console.log("viene como id", this.idForm);
     this.getAllVideos();
 
   }
