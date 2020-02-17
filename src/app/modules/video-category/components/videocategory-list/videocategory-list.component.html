@@ -1,6 +1,6 @@
 <div class="container mt-5">
     <div class="row float-right">
-        <a href="videos/new" class="btn btn-outline-success my-2 my-sm-0">New Video Category</a>
+        <a [routerLink]="['/videocategories','new']" class="btn btn-outline-success my-2 my-sm-0">New Video Category</a>
     </div>
 
     <div name="loading" id="loading" *ngIf="loading" class="d-flex justify-content-center">
@@ -25,11 +25,11 @@
                       <tr *ngFor="let videoCategory of videosDisponibles;">
                         <th scope="row">{{videoCategory.id}}</th>
                         <td>{{videoCategory.name}}</td>
-                        <td><a href="videos?videocategory_id={{videoCategory.id}}" class="btn btn-success">Asoc. Videos</a></td>
+                        <td><a href="videos?videocategory_id={{videoCategory.id}}" class="btn btn-success">Asoc. Videos</a></td> <!-- TODO revisar este link!! a routerlink-->
                         <!-- <td><button (click)="selectCategory(videoCategory)" class="btn btn-success">Asoc. Videos</button></td>-->
                         <td>
                             <button class="btn btn-danger mr-3" (click)="deleteVideoCategory(videoCategory)">Delete</button>
-                            <a href="videocategories/{{videoCategory.id}}/edit" class="btn btn-warning">Editar</a>
+                            <a [routerLink]="['/videocategories',videoCategory.id,'edit']"  [state]="{ data:videoCategory }" class="btn btn-warning">Editar</a>
                         </td>
                       </tr>
                     </tbody>

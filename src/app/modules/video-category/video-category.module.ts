@@ -8,16 +8,26 @@ import { FormsModule } from '@angular/forms';
 import { VideoCategoryRoutingModule } from './videocategory-routing.module';
 import { VideocategorySelectComponent } from './components/videocategory-select/videocategory-select.component';
 import { VideocategorySelectCVLComponent } from './components/videocategory-select-cvl/videocategory-select-cvl.component';
+import { VideocategoryformComponent } from './components/forms/videocategoryform/videocategoryform.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 
 
 @NgModule({
-  declarations: [VideocategoryAddComponent, VideocategoryEditComponent, VideocategoryListComponent, VideocategoryShowComponent, VideocategorySelectComponent, VideocategorySelectCVLComponent],
+  declarations: [
+    VideocategoryAddComponent,
+    VideocategoryEditComponent,
+    VideocategoryListComponent,
+    VideocategoryShowComponent,
+    VideocategorySelectComponent,
+    VideocategorySelectCVLComponent,
+    VideocategoryformComponent],
   imports: [
     CommonModule,
     FormsModule,
-    VideoCategoryRoutingModule
+    VideoCategoryRoutingModule,
+    SharedModule
   ],
   exports: [VideocategorySelectComponent,VideocategorySelectCVLComponent] //lo exporto para usarlo en video add
 

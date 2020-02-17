@@ -20,12 +20,12 @@ export class VideoCategoryService {
    * 
    * @param id del video en cuestion
    */
-  getVideoCategories(id){
+  getVideoCategory(id){
     return this.http.get(`${this.baseUrl}/videocategories/${id}`);
   }
 
 
-  addVideoCategory(video: VideoCategory){
+  addVideoCategory(video: VideoCategory) {
     return this.http.post(`${this.baseUrl}/videocategories`, video)
     .pipe(
       map( (resp: any) => {

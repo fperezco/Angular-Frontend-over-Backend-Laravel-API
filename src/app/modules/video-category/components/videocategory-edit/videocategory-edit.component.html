@@ -1,1 +1,11 @@
-<p>videocategory-edit works!</p>
+<div class="container  mt-5">
+    <app-loader [loading]="loading"></app-loader>
+    <div class="row" *ngIf="!loading">
+        <div class="col-md-6">
+            <app-videocategoryform [modelo]="videoCategory" (childSubmit)="updateVideoCategory($event)"> [nbrBoton]="'Actualizar'"></app-videocategoryform>      
+            <a class="btn btn-danger btn-block mt-1" [routerLink]="['/videocategories']">Cancelar</a>
+
+        </div>
+    </div>
+    <pre>{{videoCategory |json}}</pre>
+</div>

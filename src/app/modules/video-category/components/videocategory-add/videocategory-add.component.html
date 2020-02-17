@@ -1,1 +1,8 @@
-<p>videocategory-add works!</p>
+<div class="container  mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <app-videocategoryform [modelo]="videoCategory" (childSubmit)="addVideoCategory($event)"> [nbrBoton]="'Guardar'"></app-videocategoryform>     
+        </div>
+    </div>
+    <pre>{{videoCategory |json}}</pre>
+</div>
