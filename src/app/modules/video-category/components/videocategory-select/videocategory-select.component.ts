@@ -1,19 +1,31 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { VideoCategory } from '../../interfaces/videocategory.interface';
 import { VideoCategoryService } from '../../services/videocategory.service';
-import { NgForm } from '@angular/forms';
+import { NgForm, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-videocategory-select',
   templateUrl: './videocategory-select.component.html',
-  styleUrls: ['./videocategory-select.component.css']
+  styleUrls: ['./videocategory-select.component.css'],
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    multi: true,
+    useExisting: VideocategorySelectComponent
+  }]
 })
-export class VideocategorySelectComponent implements OnInit {
 
+
+
+export class VideocategorySelectComponent implements ControlValueAccessor, OnInit {
+
+  @ViewChild('select') input: ElementRef;
+  
   // puede venir del componente padre el elto seleccionado
   @Input() videoCategorySelectedId;
   videoCategories: VideoCategory[] = [];
-  constructor(private videoCategoryService: VideoCategoryService) { }
+  constructor(private videoCategoryService: VideoCategoryService) { 
+
+  }
 
   ngOnInit() {
     console.log("viene como preseleccionada la categoria", this.videoCategorySelectedId);
@@ -37,4 +49,23 @@ export class VideocategorySelectComponent implements OnInit {
       console.log(this.videoCategories);
     });
   }
+
+  // metodos obligados a implementar por la interfaz
+
+  writeValue(obj: any): void {
+    this.input.nativeElement.value = obj;
+  }
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
+  setDisabledState?(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+  }
+  onChange(event) { }
+
+  onTouched() { }
+
 }
