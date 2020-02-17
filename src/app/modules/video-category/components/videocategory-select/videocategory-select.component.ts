@@ -1,40 +1,65 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter,forwardRef } from '@angular/core';
 import { VideoCategory } from '../../interfaces/videocategory.interface';
 import { VideoCategoryService } from '../../services/videocategory.service';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-videocategory-select',
   templateUrl: './videocategory-select.component.html',
-  styleUrls: ['./videocategory-select.component.css']
+  styleUrls: ['./videocategory-select.component.css'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => VideocategorySelectComponent),
+      multi: true
+    }
+  ]
 })
 
+export class VideocategorySelectComponent implements  OnInit  , ControlValueAccessor {
+
+  value: string;
+  isDisabled: boolean;
+  onChange = (_:any) => { }
+  onTouch = () => { }
+
+  onInput(value: string) {
+    this.value = value;
+    this.onTouch();
+    this.onChange(this.value);
+  }  
+  
+  writeValue(value: any): void {
+    if (value) {
+      this.value = value || '';
+    } else {
+      this.value = '';
+    }
+  }
+
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+  
+  registerOnTouched(fn: any): void {
+    this.onTouch = fn;
+  }
+  
+  setDisabledState(isDisabled: boolean): void {
+    this.isDisabled = isDisabled;
+  }
 
 
-export class VideocategorySelectComponent implements  OnInit {
-
-
-  // puede venir del componente padre el elto seleccionado
-  @Input() model;
+  @Input() clase;
   videoCategories: VideoCategory[] = [];
 
-      // note that this must be named as the input name + "Change"
-      @Output() modelChange: any = new EventEmitter();
-
-      updateData(event) {
-        this.model = event;
-        this.modelChange.emit(event);
-        console.log("en hijo, model change",event);
-      }
-
-  
   constructor(private videoCategoryService: VideoCategoryService) { 
 
   }
 
   ngOnInit() {
-    console.log("viene como model", this.model);
+    console.log("viene como model", this.value);
     this.getAllVideos();
-
   }
 
   getAllVideos() {

@@ -33,6 +33,7 @@ export class VideocategorySelectCVLComponent implements OnInit , ControlValueAcc
   }  
   
   writeValue(value: any): void {
+    console.log("traigo el valor del ngmodel", value);
     if (value) {
       this.value = value || '';
     } else {
@@ -72,7 +73,7 @@ export class VideocategorySelectCVLComponent implements OnInit , ControlValueAcc
   }
 
   ngOnInit() {
-    //console.log("viene como model", this.model);
+    console.log("viene como model", this.value);
     this.getAllVideos();
 
   }

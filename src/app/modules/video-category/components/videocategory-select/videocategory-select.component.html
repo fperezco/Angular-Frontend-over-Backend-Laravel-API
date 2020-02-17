@@ -1,4 +1,16 @@
-<div class="form-group">
+<select 
+class="form-control"
+[value]="value"
+[disabled]="isDisabled"
+(input)="onInput($event.target.value)"
+[ngClass]=clase>
+
+<option value="">Elegir...</option>
+<option *ngFor="let videoCategory of videoCategories" value="{{videoCategory.id}}" [selected]="videoCategory.id == value" >{{videoCategory.name}}</option>
+</select>
+
+
+<!--<div class="form-group">
     <label for="videocategory_id">Categoria Video</label>
     <select class="form-control" id="videocategory_id" name="videocategory_id" [ngModel]=model (ngModelChange)="updateData($event)" name="select" #select="ngModel" required
      [ngClass]="{'is-invalid':  (select.errors?.required) && select.touched , 'is-valid': (!select.errors?.required)}">
@@ -8,7 +20,7 @@
     <div *ngIf="select.errors?.required && select.touched" class="invalid-feedback">
         Ha de seleccionar una categoria
     </div>
-</div>
+</div>-->
 
 
 <!--

@@ -29,13 +29,14 @@
                     </div>
                 </div>
                 -->
+                
 
                 <!--<app-videocategory-select [(model)]="video.videocategory_id" ></app-videocategory-select>-->
                 
                 <!--<app-videocategory-select-cvl name="yea" required [(ngModel)]="video.videocategory_id"></app-videocategory-select-cvl>
                 -->
                 
-                
+                <!--
                 <div class="form-group">
                     <label for="videocategory_id">Categoria Video</label>
                     <select class="form-control" id="videocategory_id"  [(ngModel)]="video.videocategory_id" name="videocategory_id" #videocategory_id="ngModel" required
@@ -47,6 +48,31 @@
                         Ha de seleccionar una categoria
                     </div>
                 </div>
+
+            -->   
+
+
+                
+                <div class="form-group">
+                    <label for="videocategory_id">Categoria Video</label>
+                    <app-videocategory-select 
+                    name="categoria" 
+                    [(ngModel)]="video.videocategory_id"
+                    [clase]="{'is-invalid':  ( categoria.errors?.required) && categoria.touched , 'is-valid': (!categoria.errors?.required)}"
+                    [ngClass]="{'is-invalid':  ( categoria.errors?.required) && categoria.touched , 'is-valid': (!categoria.errors?.required)}"
+                    required
+                    #categoria="ngModel"
+                    >
+                    </app-videocategory-select>
+    
+            
+                    <div *ngIf="categoria.errors?.required && categoria.touched" class="invalid-feedback">
+                        Este campo es requerido
+                    </div>
+                </div> 
+
+
+
 
         <!--
     <input
@@ -114,6 +140,5 @@ required #categoria="ngModel"
 
     <pre>{{video |json}}</pre>
 
-
-
 </div>
+
