@@ -33,7 +33,7 @@ export class VideoAddComponent implements OnInit {
       console.log(forma.value);
   
       this.launchSweetUpdating();
-      this.video.user_id = 3;     //OJOOOO AKI!!!!!!!!!!!! A ESTO!!!!!!!!!!
+      //this.video.user_id = 3;     //OJOOOO AKI!!!!!!!!!!!! A ESTO!!!!!!!!!!
       //this.video.videocategory_id = 3;
   
       this.videoService.addVideo(this.video)
