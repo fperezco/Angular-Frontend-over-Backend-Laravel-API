@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../../user/interfaces/user.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,7 @@ import { User } from '../../../user/interfaces/user.interface';
 export class LoginComponent implements OnInit {
 
   user: User = {};
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,private router:Router) { }
 
   ngOnInit() {
   }
@@ -22,6 +23,7 @@ export class LoginComponent implements OnInit {
         console.log("login exitoso, viene token");
         console.log("respuesta", resp['token']);
         localStorage.setItem('auth_token', resp.token);
+        this.router.navigateByUrl("home");
       }
       ,
       (error) => {

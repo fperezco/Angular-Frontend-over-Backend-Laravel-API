@@ -10,12 +10,13 @@ import { AuthModule } from '../auth/auth.module';
 
 
 
+
 @NgModule({
   declarations: [HeaderComponent, FooterComponent, HomeComponent, DomseguroPipe, LoaderComponent],
   imports: [
     CommonModule,
     SharedRoutingModule,
-    AuthModule
+    AuthModule,
   ],
   exports: [HomeComponent, HeaderComponent, FooterComponent, LoaderComponent]
 })
