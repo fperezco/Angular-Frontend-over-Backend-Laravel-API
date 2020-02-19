@@ -7,6 +7,9 @@ import { AppRoutingModule } from './app.routes';
 import { SharedModule } from './modules/shared/shared.module';
 import { VideoModule } from './modules/video/video.module';
 import { VideoCategoryModule } from './modules/video-category/video-category.module';
+import { UserModule } from './modules/user/user.module';
+import { LoginRoutingModule } from './modules/auth/auth-routing.module';
+import { AuthModule } from './modules/auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,9 @@ import { VideoCategoryModule } from './modules/video-category/video-category.mod
     HttpClientModule,
     SharedModule,
     VideoModule,
-    VideoCategoryModule
+    VideoCategoryModule,
+    UserModule,
+    AuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]

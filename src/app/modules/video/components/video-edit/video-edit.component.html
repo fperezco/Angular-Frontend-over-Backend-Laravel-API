@@ -2,7 +2,7 @@
     <app-loader [loading]="loading"></app-loader>
     <div class="row" *ngIf="!loading">
         <div class="col-md-6">
-            <app-videoform [modelo]="video"  (childSubmit)="updateVideo($event)"> [nbrBoton]="'Updatear'"></app-videoform>     
+            <app-videoform [modelo]="video"  (childSubmit)="updateVideo($event)" [nbrBoton]="'Updatear'"></app-videoform>     
             <a class="btn btn-danger btn-block mt-1" [routerLink]="['/videos',video.id]" [state]="{ data:video }" >Cancelar</a>
                 <!--paso el state con el video para evitar que show consuma de nuevo un webservice -->
         </div>

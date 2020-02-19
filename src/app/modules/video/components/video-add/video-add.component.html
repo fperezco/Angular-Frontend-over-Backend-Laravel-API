@@ -1,7 +1,7 @@
 <div class="container  mt-5">
     <div class="row">
         <div class="col-md-6">
-            <app-videoform [modelo]="video"  (childSubmit)="addVideo($event)"> [nbrBoton]="'Guardar'"></app-videoform>     
+            <app-videoform [modelo]="video"  (childSubmit)="addVideo($event)" [nbrBoton]="'Guardar'"></app-videoform>     
         </div>
         <div class="col-md-4" *ngIf="video.picture">
             <img class="img-thumbnail" [src]="video.picture">

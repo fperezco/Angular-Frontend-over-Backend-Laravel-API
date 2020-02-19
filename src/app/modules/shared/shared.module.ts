@@ -6,6 +6,7 @@ import { HomeComponent } from './components/home/home.component';
 import { SharedRoutingModule } from './shared-routing.module';
 import { DomseguroPipe } from './pipes/domseguro.pipe';
 import { LoaderComponent } from './components/loader/loader.component';
+import { AuthModule } from '../auth/auth.module';
 
 
 
@@ -13,7 +14,8 @@ import { LoaderComponent } from './components/loader/loader.component';
   declarations: [HeaderComponent, FooterComponent, HomeComponent, DomseguroPipe, LoaderComponent],
   imports: [
     CommonModule,
-    SharedRoutingModule
+    SharedRoutingModule,
+    AuthModule
   ],
   exports: [HomeComponent, HeaderComponent, FooterComponent, LoaderComponent]
 })

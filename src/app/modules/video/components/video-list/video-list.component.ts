@@ -15,24 +15,20 @@ export class VideoListComponent implements OnInit {
   loading = true;
   videosDisponibles: Video[] = [];
   selectedVideo: Video = null;
-  VideoCategory: VideoCategory = {};
+  videoCategoryId = null;
 
   constructor(private videoService: VideoService, private activatedRoute: ActivatedRoute, private VideoCategoryService: VideoCategoryService) { 
-    /*let videoCategoryId = this.activatedRoute.snapshot.queryParamMap.get("videocategory_id");
-    console.log('la categoria del video es:' ,videoCategoryId);
-    //obtengo dicha categoria
-    this.VideoCategory = this.VideoCategoryService.getVideoCategoryb
-*/
-
-    this.getAllVideos();
+    this.videoCategoryId = this.activatedRoute.snapshot.queryParamMap.get("videocategory_id");
+    console.log('la categoria del video es:' ,this.videoCategoryId);
+    this.getAllVideos(this.videoCategoryId);
   }
 
   ngOnInit() {
   }
 
-  getAllVideos() {
+  getAllVideos(videoCategoryId) {
     this.loading = true;
-    this.videoService.getAllVideos()
+    this.videoService.getAllVideos(videoCategoryId)
     .subscribe ( resp => {
       console.log(resp.data);
       for (const res of resp.data) {

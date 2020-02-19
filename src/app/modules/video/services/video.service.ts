@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Video } from '../interfaces/video.interface';
 import { map } from 'rxjs/operators';
+import { VideoCategory } from '../../video-category/interfaces/videocategory.interface';
+import { empty } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +14,18 @@ export class VideoService {
 
   constructor( private http: HttpClient) { }
 
-  getAllVideos(): any {
-    return this.http.get(`${this.baseUrl}/videos/`);
+  getAllVideos(videoCategoryId): any {
+    console.log("webservice viene categoria= ",videoCategoryId);
+    if(videoCategoryId !== null) {
+      return this.http.get(`${this.baseUrl}/videos?fields=id,picture,name&videocategory_id=${videoCategoryId}`);
+    }
+    else
+    {
+      console.log("por aki");
+      return this.http.get(`${this.baseUrl}/videos?fields=id,picture,name`); 
+
+    }
+
   }
 
   getAllVideosByVideoCategory(videoCategoryId){
