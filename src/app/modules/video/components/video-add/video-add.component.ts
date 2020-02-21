@@ -4,6 +4,7 @@ import { VideoService } from '../../services/video.service';
 import Swal from 'sweetalert2';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SweetAlertsComponent } from 'src/app/modules/shared/components/sweet-alerts/sweet-alerts.component';
 
 @Component({
   selector: 'app-video-add',
@@ -13,7 +14,10 @@ import { Router } from '@angular/router';
 export class VideoAddComponent implements OnInit {
 
   video: Video = {};
-  constructor(private videoService: VideoService, private router:Router) { }
+  constructor(
+    private videoService: VideoService,
+    private router:Router,
+    private sweetAlerts: SweetAlertsComponent) { }
 
   ngOnInit() {
   }
@@ -24,48 +28,27 @@ export class VideoAddComponent implements OnInit {
    */
   addVideo(forma: NgForm){
     console.log("invocado ADDvideo");
+    
     if(forma.value){
-
-  
       console.log( 'ngForm' , forma);
-  
       console.log('esto es lo que tengo ');
       console.log(forma.value);
   
-      this.launchSweetUpdating();
-      //this.video.user_id = 3;     //OJOOOO AKI!!!!!!!!!!!! A ESTO!!!!!!!!!!
-      //this.video.videocategory_id = 3;
-  
+      this.sweetAlerts.launchSweetUpdating();
+
       this.videoService.addVideo(this.video)
         .subscribe(  (resp: any) => {
           this.video = resp.data;
-          console.log('en compomente video actualizado:', this.video);
-          this.launchSweetUpdated(this.video.name);
+          console.log('en compomente video add:', this.video);
+          this.sweetAlerts.launchSweetUpdated(this.video.name);
+          this.router.navigateByUrl('/videos');
+        },
+        (error) => {
+          console.log('Error en add ', error);
+          this.sweetAlerts.launchSweetError('Add video error');
           this.router.navigateByUrl('/videos');
         });
-  
     }
-
-
-  }
-
-  launchSweetUpdating(){
-    Swal.fire({
-      icon: 'info',
-      title: 'Espere',
-      text: 'Guardando informacion',
-      allowOutsideClick: false
-    });
-
-    Swal.showLoading();
-  }
-
-  launchSweetUpdated(name){
-    Swal.fire({
-      icon: 'success',
-      title: name,
-      text: 'Se almacenó correctamente'
-    });
   }
 
 

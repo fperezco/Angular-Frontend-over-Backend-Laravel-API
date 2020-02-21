@@ -14,9 +14,17 @@ export class AuthbarComponent{
 
 
   logout(){
-    console.log("invoke logout");
-    this.authService.logout();
-    this.router.navigateByUrl("/login");
+    this.authService.logout()
+    .then((response) => {
+        console.log("logout correcto ", response);
+        this.router.navigateByUrl("/login");
+    })
+    .catch((error) => {
+        console.log("logout incorrecto", error);
+    });
+    
+
+
   }
 
 }

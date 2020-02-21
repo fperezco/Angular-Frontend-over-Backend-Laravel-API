@@ -4,6 +4,7 @@ import { VideoService } from '../../services/video.service';
 import { Video } from '../../interfaces/video.interface';
 import Swal from 'sweetalert2';
 import { noUndefined } from '@angular/compiler/src/util';
+import { SweetAlertsComponent } from '../../../shared/components/sweet-alerts/sweet-alerts.component';
 
 @Component({
   selector: 'app-video-show',
@@ -15,30 +16,19 @@ export class VideoShowComponent implements OnInit {
   loading = false;
   video: Video = {};
 
-  constructor(private activatedRoute: ActivatedRoute, private videoService: VideoService, private router: Router) {
-   /* this.activatedRoute.params.subscribe( params => {
-      console.log(params);
-      this.getVideo(params['id']);
-    });*/
-
-    if ( noUndefined(this.router.getCurrentNavigation().extras.state)) {
-      //si no esta undefined => viene el objecto por ruta
-      console.log("show, el objeto viene por ruta");
-      this.video = history.state.data;
-  }
-  else {
-    console.log("consumo el webservice en show ya que NO VIENE POR RUTA");
-    this.activatedRoute.params.subscribe( params => {
-      console.log(params);
-      this.getVideo(params['id']);
-    });
-  }
-
-
-
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private videoService: VideoService,
+    private router: Router,
+    private sweetAlerts: SweetAlertsComponent) {
   }
 
   ngOnInit() {
+      console.log('consumo el webservice en show ya que NO VIENE POR RUTA');
+      this.activatedRoute.params.subscribe( params => {
+        console.log(params);
+        this.getVideo(params['id']);
+      });
   }
 
   getVideo(id: string){
@@ -48,54 +38,33 @@ export class VideoShowComponent implements OnInit {
         this.video = resp.data;
         console.log('en compomente video:', this.video);
         this.loading = false;
+      },
+      (error) => {
+        console.log('Error en show ',error);
+        this.sweetAlerts.launchSweetError("Error obteniendo video");
+        this.router.navigateByUrl('/videos');
       });
   }
 
   deleteVideo() {
-
-    Swal.fire({
-      title: 'Confirmación',
-      text: `¿Esta seguro de borrar a ${this.video.name}?`,
-      icon: 'question',
-      showCancelButton: true,
-      showConfirmButton: true
-    }).then(resp => {
+    this.sweetAlerts.launchSweetYesNo('Confirmación', `¿Esta seguro de borrar a ${this.video.name}?`)
+    .then(resp => {
         if (resp.value) {
-
-            // invocamos el subscribe para que se dispare
-            this.launchSweetUpdating();
-            this.videoService.deleteVideo(this.video)
-              .subscribe(  (resp: any) => {
-                //this.video = resp.data; //pk delete no me esta devolviendo nada
-                console.log('en compomente borrar video:', this.video);
-                this.launchSweetDeleted(this.video.name);
-                this.router.navigateByUrl('/videos');
-              });
-
-
-
+          // invocamos el subscribe para que se dispare
+          this.sweetAlerts.launchSweetUpdating();
+          this.videoService.deleteVideo(this.video)
+            .subscribe(  (resp: any) => {
+              // this.video = resp.data; //pk delete no me esta devolviendo nada
+              console.log('en compomente borrar video:', this.video);
+              this.sweetAlerts.launchSweetDeleted(this.video.name);
+              this.router.navigateByUrl('/videos');
+            },
+            (error) => {
+              console.log('Error en delete ',error);
+              this.sweetAlerts.launchSweetError("Delete video error");
+              this.router.navigateByUrl('/videos');
+            });
         }
     });
-
   }
-
-
-  launchSweetUpdating() {
-    Swal.fire({
-      icon: 'info',
-      title: 'Espere',
-      text: 'Actualizando informacion',
-      allowOutsideClick: false
-    });
-    Swal.showLoading();
-  }
-
-  launchSweetDeleted(name) {
-    Swal.fire({
-      icon: 'error',
-      title: name,
-      text: `Se eliminó correctamente ${name}`
-    });
-  }
-
 }

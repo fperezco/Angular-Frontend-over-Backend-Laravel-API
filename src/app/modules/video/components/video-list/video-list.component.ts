@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { VideoService } from '../../services/video.service';
 import { Video } from '../../interfaces/video.interface';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { VideoCategory } from '../../../video-category/interfaces/videocategory.interface';
 import { VideoCategoryService } from '../../../video-category/services/videocategory.service';
+import { SweetAlertsComponent } from 'src/app/modules/shared/components/sweet-alerts/sweet-alerts.component';
 
 @Component({
   selector: 'app-video-list',
@@ -17,10 +18,14 @@ export class VideoListComponent implements OnInit {
   selectedVideo: Video = null;
   videoCategoryId = null;
 
-  constructor(private videoService: VideoService, private activatedRoute: ActivatedRoute, private VideoCategoryService: VideoCategoryService) { 
-    this.videoCategoryId = this.activatedRoute.snapshot.queryParamMap.get("videocategory_id");
-    console.log('la categoria del video es:' ,this.videoCategoryId);
-    this.getAllVideos(this.videoCategoryId);
+  constructor(
+    private videoService: VideoService,
+    private activatedRoute: ActivatedRoute,
+    private sweetAlerts: SweetAlertsComponent,
+    private router: Router) { 
+      this.videoCategoryId = this.activatedRoute.snapshot.queryParamMap.get("videocategory_id");
+      console.log('la categoria del video es:' ,this.videoCategoryId);
+      this.getAllVideos(this.videoCategoryId);
   }
 
   ngOnInit() {
@@ -43,6 +48,11 @@ export class VideoListComponent implements OnInit {
       this.loading = false;
       console.log('los videos son');
       console.log(this.videosDisponibles);
+    },
+    ( error ) => {
+      console.log('Error on list ', error);
+      this.sweetAlerts.launchSweetError('List video error');
+      this.router.navigateByUrl('home');
     });
   }
 

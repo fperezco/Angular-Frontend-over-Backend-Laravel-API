@@ -7,17 +7,18 @@ import { SharedRoutingModule } from './shared-routing.module';
 import { DomseguroPipe } from './pipes/domseguro.pipe';
 import { LoaderComponent } from './components/loader/loader.component';
 import { AuthModule } from '../auth/auth.module';
+import { SweetAlertsComponent } from './components/sweet-alerts/sweet-alerts.component';
 
 
 
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, HomeComponent, DomseguroPipe, LoaderComponent],
+  declarations: [HeaderComponent, FooterComponent, HomeComponent, DomseguroPipe, LoaderComponent, SweetAlertsComponent],
   imports: [
     CommonModule,
     SharedRoutingModule,
     AuthModule,
   ],
-  exports: [HomeComponent, HeaderComponent, FooterComponent, LoaderComponent]
+  exports: [HomeComponent, HeaderComponent, FooterComponent, LoaderComponent, SweetAlertsComponent]
 })
 export class SharedModule { }

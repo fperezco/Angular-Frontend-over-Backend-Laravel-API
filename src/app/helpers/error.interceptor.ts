@@ -13,8 +13,10 @@ export class ErrorInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(request).pipe(catchError(err => {
             if (err.status === 401) {
+                console.log("_guard_ no estamos autorizados");
                 // auto logout if 401 response returned from api
-                this.authenticationService.logout();
+                //this.authenticationService.logout();
+                this.authenticationService.removeToken();
                 //location.reload(true);
                 this.router.navigateByUrl("login");
             }

@@ -10,6 +10,7 @@ import { VideocategorySelectComponent } from './components/videocategory-select/
 import { VideocategorySelectCVLComponent } from './components/videocategory-select-cvl/videocategory-select-cvl.component';
 import { VideocategoryformComponent } from './components/forms/videocategoryform/videocategoryform.component';
 import { SharedModule } from '../shared/shared.module';
+import { VideoCategoryService } from './services/videocategory.service';
 
 
 
@@ -30,6 +31,5 @@ import { SharedModule } from '../shared/shared.module';
     SharedModule
   ],
   exports: [VideocategorySelectComponent,VideocategorySelectCVLComponent] //lo exporto para usarlo en video add
-
 })
 export class VideoCategoryModule { }

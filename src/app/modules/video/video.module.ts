@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { VideoCategoryModule } from '../video-category/video-category.module';
 import { VideoformComponent } from './components/forms/videoform/videoform.component';
 import { SharedModule } from '../shared/shared.module';
+import { SweetAlertsComponent } from '../shared/components/sweet-alerts/sweet-alerts.component';
 
 
 
@@ -20,6 +21,7 @@ import { SharedModule } from '../shared/shared.module';
     VideoRoutingModule,
     VideoCategoryModule, //para usar el videocategoryselectcomponent en video add y video edit,
     SharedModule //para usar el componente loader
-  ]
+  ],
+  providers: [SweetAlertsComponent]
 })
 export class VideoModule { }

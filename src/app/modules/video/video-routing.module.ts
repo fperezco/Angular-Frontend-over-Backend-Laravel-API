@@ -16,7 +16,7 @@ const videoRoutes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forChild(videoRoutes)
+    RouterModule.forChild(videoRoutes),
   ],
   exports: [
     RouterModule
